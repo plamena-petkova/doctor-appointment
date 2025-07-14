@@ -1,16 +1,30 @@
 import DoctorAppointmentLanding from '@/components/ui/DoctorAppointments'
 
-type Props = {
+type PageProps = {
   params: {
     slug?: string[]
   }
 }
 
-export function generateMetadata() {
-  // your existing metadata generator
+export function generateMetadata({ params }: PageProps) {
+  const slug = params.slug?.join('/') || ''
+
+  // Return static or simple slug-based metadata, no await here
+  if (slug === '' || slug === 'doctor-appointment') {
+    return {
+      title: 'Doctor Appointment',
+      description: 'Book your doctor appointment easily.',
+    }
+  }
+
+  // Default metadata for other slugs
+  return {
+    title: `Page: ${slug}`,
+    description: `This is the page for ${slug}`,
+  }
 }
 
-export default function PageTemplate({ params }: Props) {
+export default function PageTemplate({ params }: PageProps) {
   // If slug is undefined or empty, that means root "/"
   const slug = params.slug?.join('/') || ''
 
