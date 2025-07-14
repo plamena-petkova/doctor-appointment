@@ -1,5 +1,4 @@
 import DoctorAppointmentLanding from '@/components/ui/DoctorAppointments'
-import { useParams } from 'next/navigation' // or get params server-side if using server components
 
 type Props = {
   params: {
