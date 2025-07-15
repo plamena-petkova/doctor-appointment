@@ -1,7 +1,14 @@
 import DoctorAppointmentLanding from '@/components/ui/DoctorAppointments'
+import { Metadata } from 'next'
 
-export function generateMetadata({ params }: { params: { slug?: string[] } }) {
-  const slug = params.slug?.join('/') || ''
+interface Params {
+  params: {
+    slug: string
+  }
+}
+
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const { slug } = params
 
   if (slug === '' || slug === 'doctor-appointment') {
     return {
@@ -26,7 +33,6 @@ export default function Page({ params }: { params: { slug?: string[] } }) {
   return (
     <div>
       <h1>Page for slug: {slug}</h1>
-      {/* Other static content here */}
     </div>
   )
 }

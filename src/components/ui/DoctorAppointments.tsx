@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import React, { useEffect, useRef } from 'react'
 
 type Props = {
-  jotformUrl: string // example: https://form.jotform.com/jsform/1234567890
+  jotformUrl: string
 }
 
 const DoctorAppointmentLanding: React.FC<Props> = ({ jotformUrl }) => {
@@ -15,17 +15,14 @@ const DoctorAppointmentLanding: React.FC<Props> = ({ jotformUrl }) => {
   useEffect(() => {
     if (!formRef.current) return
 
-    // Clear previous form if any
     formRef.current.innerHTML = ''
 
-    // Create script tag
     const script = document.createElement('script')
-    script.src = jotformUrl // This should be the JS embed URL from JotForm
+    script.src = jotformUrl
     script.async = true
 
     formRef.current.appendChild(script)
 
-    // Cleanup script if component unmounts or url changes
     return () => {
       if (formRef.current) formRef.current.innerHTML = ''
     }
